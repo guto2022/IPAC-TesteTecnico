@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: ipac-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ipac
+
+    ports:
+      - "5431:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
