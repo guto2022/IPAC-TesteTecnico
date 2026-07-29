@@ -1,13 +1,49 @@
 <script setup lang="ts">
     import { ref } from "vue";
+    import api from "../api/api";
 
-    const description = ref("");
-    const isSaved = ref(false)
+    const description = ref<string>("");
+    const message = ref<string>("");
+    const isSaved = ref<boolean | null>(null);
+
+    const clearMessage = () => {
+        setTimeout(() => {
+            message.value = "";
+            isSaved.value = null;
+        }, 3000);
+    }
+
+    const showMessage = (messageText: string, success: boolean) => {
+        message.value = messageText;
+        isSaved.value = success;
+
+        clearMessage();
+    }
+
+    const createItem = async () => {
+        try{
+            if (description.value.trim() === "") {
+                showMessage("Digite uma descrição.", false);
+                return;
+            }
+
+            await api.post("/items", {
+                description: description.value
+            });
+
+            showMessage("Item salvo com sucesso!", true);
+            description.value = "";
+
+        } catch(error) {
+            showMessage("Erro ao salvar o item. Por favor, tente novamente.", false);
+            console.error(error)
+        }
+    }
 
 </script>
 
 <template>
-    <main class="flex justify-center mt-16">
+    <main class="flex justify-center mt-8">
 
         <div class="w-full max-w-lg bg-white rounded-xl shadow-lg p-8">
 
@@ -26,17 +62,21 @@
             >
 
             <button
-                @click="isSaved=true"
+                @click="createItem"
                 class="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-md transition"
             >
                 Salvar
             </button>
-
+            
             <p 
-                v-if="isSaved"
+                v-if="isSaved !== null"
                 class="flex justify-center mt-4"
+                :class="{
+                    'text-green-600': isSaved,
+                    'text-red-600': !isSaved
+                }"
             >
-                Item salvo com sucesso!
+                {{ message }}
             </p>
 
         </div>

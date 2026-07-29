@@ -15,12 +15,10 @@ const page = ref("view");
 
   <main class="p-6">
     <div v-if="page === 'create'">
-      <h1>Criar Checklists</h1>
       <Create />
     </div>
 
-    <div v-else>
-      <h1>Lista de Checklist</h1>
+    <div v-if="page === 'view'">
       <View />
     </div>
   </main>

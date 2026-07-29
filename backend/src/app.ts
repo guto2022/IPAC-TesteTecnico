@@ -1,9 +1,14 @@
 import "dotenv/config"
 import express from "express";
+import cors from "cors";
 import itemRoutes from "./routes/item";
 import checklistRoutes from "./routes/checklist";
 
 const app = express();
+
+app.use(cors({
+    origin: "http://localhost:5173"
+}));
 app.use(express.json());
 
 
