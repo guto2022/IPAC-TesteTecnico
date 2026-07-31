@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:docker": "prisma migrate dev && tsx src/app.ts"
+    "start:docker": "prisma migrate dev && tsx src/app.ts",
+    "start:prod": "prisma migrate deploy && tsx src/app.ts"
   },
   "keywords": [],
   "author": "",
