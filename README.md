@@ -114,6 +114,7 @@ Após a inicialização, a aplicação estará disponível em:
 - Frontend: `http://localhost:5173`
 - Backend: `http://localhost:3000`
 - Health check: `http://localhost:3000/healthcheck`
+- Data Base: Hospedado no Neon
 
 > Na primeira execução, o Docker poderá levar alguns minutos para baixar as imagens e instalar as dependências.
 
