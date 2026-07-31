@@ -1,24 +1,28 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import api from "../api/api";
+    import { ref, onMounted } from "vue";
+    import api from "../api/api";
 
-interface Item {
-    id: number;
-    description: string;
-}
-
-const items = ref<Item[]>([]);
-
-const loadItems = async () => {
-    try {
-        const response = await api.get("/items");
-        items.value = response.data;
-    } catch (error) {
-        console.error(error);
+    interface Item {
+        id: number;
+        description: string;
     }
-};
 
-onMounted(loadItems);
+    const items = ref<Item[]>([]);
+
+    const isLoading = ref<boolean>(true)
+
+    const loadItems = async () => {
+        try {
+            const response = await api.get("/items");
+            items.value = response.data;
+        } catch (error) {
+            console.error(error);
+        } finally {
+            isLoading.value = false;
+        }
+    };
+
+    onMounted(loadItems);
 </script>
 
 <template>
@@ -30,7 +34,14 @@ onMounted(loadItems);
             </h2>
 
             <div
-                v-if="items.length === 0"
+                v-if="isLoading"
+                class="text-center text-gray-500 py-10 border rounded-lg"
+            >
+                Carregando...
+            </div>
+
+            <div
+                v-else-if="items.length === 0"
                 class="text-center text-gray-500 py-10 border rounded-lg"
             >
                 Nenhum item cadastrado.

@@ -17,6 +17,8 @@
 
     const items = ref<Item[]>([]);
 
+    const isLoading = ref<boolean>(true)
+
     const toggleItem = (item: number) => {
         if (!selectedItems.value.includes(item)) {
             selectedItems.value.push(item)
@@ -47,6 +49,8 @@
             items.value = response.data;
         } catch (error) {
             console.error(error);
+        } finally {
+            isLoading.value = false;
         }
     };
 
@@ -162,7 +166,14 @@
 
             <div class="my-2">
                 <div
-                    v-if="items.length === 0"
+                    v-if="isLoading"
+                    class="text-center text-gray-500 py-10 border rounded-lg"
+                >
+                    Carregando...
+                </div>
+
+                <div
+                    v-else-if="items.length === 0"
                     class="text-center text-gray-500 py-10 border rounded-lg"
                 >
                     Nenhum item cadastrado.
