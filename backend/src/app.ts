@@ -8,7 +8,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://ipac-teste-tecnico-nu.vercel.app/",
+  "https://ipac-teste-tecnico-nu.vercel.app",
 ];
 
 app.use(cors({
@@ -25,6 +25,9 @@ app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000")
 });
 
-app.get("/healthcheck", () => {
-    console.log("API está no ar!")
+app.get("/healthcheck", (req, res) => {
+    res.status(200).json({
+    status: "ok",
+    message: "API está no ar!",
+  });
 });

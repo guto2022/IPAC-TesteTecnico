@@ -12,6 +12,8 @@ O projeto consiste em um sistema para cadastro e visualização de checklists, p
 - Backend: `https://ipac-testetecnico.onrender.com`
 - Health check: `https://ipac-testetecnico.onrender.com/healthcheck`
 
+> **Observação:** o backend está hospedado no plano gratuito do Render e pode entrar em modo de inatividade após um período sem acessos. Nesse caso, a primeira requisição pode levar alguns segundos para ser respondida enquanto o serviço é reativado.
+
 ---
 
 ## Tecnologias utilizadas
