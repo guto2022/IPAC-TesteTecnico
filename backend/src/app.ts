@@ -25,6 +25,6 @@ app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000")
 });
 
-app.get("/", () => {
+app.get("/healthcheck", () => {
     console.log("API está no ar!")
 });

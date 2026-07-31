@@ -6,6 +6,14 @@ O projeto consiste em um sistema para cadastro e visualização de checklists, p
 
 ---
 
+## Aplicação publicada
+
+- Frontend: `https://ipac-teste-tecnico.vercel.app`
+- Backend: `https://ipac-testetecnico.onrender.com`
+- Health check: `https://ipac-testetecnico.onrender.com/healthcheck`
+
+---
+
 ## Tecnologias utilizadas
 
 ### Backend
@@ -29,18 +37,20 @@ O projeto consiste em um sistema para cadastro e visualização de checklists, p
 - Docker
 - Docker Compose
 
-### Diferenciais implementados
+---
+
+## Diferenciais implementados
 
 - Docker para ambiente de desenvolvimento
 - Progressive Web App (PWA)
 - Interface responsiva
-- Execução de checklist (Conforme / Não conforme) em memória
+- Execução de checklist com as opções **Conforme** e **Não conforme**, sem persistência no banco de dados
 
 ---
 
 ## Pré-requisitos
 
-Antes de executar o projeto é necessário possuir instalado:
+Antes de executar o projeto localmente, é necessário possuir instalado:
 
 - Docker
 - Docker Compose
@@ -63,7 +73,7 @@ DATABASE_URL=postgresql://postgres:password@postgres:5432/ipac
 
 ---
 
-## Executando o projeto
+## Executando o projeto localmente
 
 ### 1. Clonar o repositório
 
@@ -75,17 +85,19 @@ cd IPAC-TesteTecnico
 
 ### 2. Criar o arquivo `.env`
 
-Copie o conteúdo do arquivo:
+Copie o arquivo:
 
 ```text
 .env.example
 ```
 
-para um novo arquivo:
+e crie um novo arquivo chamado:
 
 ```text
 .env
 ```
+
+Preencha as variáveis utilizando os valores desejados.
 
 ### 3. Executar com Docker
 
@@ -97,16 +109,17 @@ O backend executará automaticamente as migrações do Prisma durante a iniciali
 
 Após a inicialização, a aplicação estará disponível em:
 
-- Frontend: http://localhost:5173
-- Backend: http://localhost:3000
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:3000`
+- Health check: `http://localhost:3000/healthcheck`
 
-> Na primeira execução o Docker poderá levar alguns minutos para baixar as imagens e instalar as dependências.
+> Na primeira execução, o Docker poderá levar alguns minutos para baixar as imagens e instalar as dependências.
 
 ---
 
 ## Banco de dados
 
-Na execução via Docker, as migrações do Prisma são executadas automaticamente durante a inicialização do backend.
+Na execução local via Docker, o PostgreSQL é iniciado em um container e as migrações do Prisma são executadas automaticamente durante a inicialização do backend.
 
 Não é necessário executar comandos manualmente.
 
@@ -118,18 +131,19 @@ Não é necessário executar comandos manualmente.
 
 - Cadastro de itens
 - Cadastro de checklists
-- Associação entre checklist e itens
+- Associação entre checklists e itens
 - Listagem dos checklists disponíveis
 - Visualização dos itens pertencentes ao checklist
-- Filtro por status do checklist (Pronto/Rascunho)
-- Integração completa entre frontend e backend
+- Filtro por status do checklist (**Pronto** e **Rascunho**)
+- Integração completa entre frontend, backend e banco de dados
 
 ### Diferenciais
 
-- Docker
+- Docker para execução do ambiente de desenvolvimento
 - Progressive Web App (PWA), permitindo a instalação da aplicação em dispositivos compatíveis
 - Interface responsiva
-- Execução dos itens do checklist (Conforme / Não conforme) sem persistência no banco de dados
+- Execução dos itens do checklist com as opções **Conforme** e **Não conforme**, sem persistência no banco de dados
+- Aplicação publicada com frontend e backend acessíveis publicamente
 
 ---
 
@@ -144,7 +158,7 @@ Conforme especificado no desafio, não foram implementadas:
 - Dashboard
 - Relatórios
 
-A execução dos itens ("Conforme" e "Não conforme") foi implementada apenas em memória. A persistência dessas respostas no banco de dados foi mantida como opcional, conforme descrito no desafio técnico.
+A execução dos itens com as opções **Conforme** e **Não conforme** foi implementada apenas em memória. A persistência dessas respostas no banco de dados foi mantida como opcional, conforme descrito no desafio técnico.
 
 ---
 
@@ -153,8 +167,11 @@ A execução dos itens ("Conforme" e "Não conforme") foi implementada apenas em
 - Utilização do Prisma ORM para gerenciamento do banco de dados e execução das migrações.
 - Docker Compose para simplificar a configuração e execução do ambiente de desenvolvimento.
 - Vue 3 com Composition API para organização dos componentes.
-- Tailwind CSS para construção da interface de forma simples e responsiva.
+- Tailwind CSS para construção de uma interface simples e responsiva.
 - Progressive Web App (PWA) implementado como diferencial opcional.
+- Separação entre frontend, backend e banco de dados para manter as responsabilidades organizadas.
+- Uso de variáveis de ambiente para configurar a URL da API conforme o ambiente de execução.
+- Configuração de CORS para permitir requisições do frontend local e da aplicação publicada.
 
 ---
 
