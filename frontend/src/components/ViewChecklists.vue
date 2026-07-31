@@ -6,6 +6,8 @@
 
     const statusFilter = ref<"PRONTO" | "RASCUNHO">("PRONTO");
 
+    const isLoading = ref<boolean>(true)
+
     interface Item {
         id: number;
         description: string;
@@ -40,6 +42,8 @@
             checklists.value = response.data;
         } catch (error) {
             console.error(error);
+        } finally {
+            isLoading.value = false;
         }
     };
 
@@ -94,7 +98,14 @@
             </div>
 
             <div
-                v-if="checklists.length === 0"
+                v-if="isLoading"
+                class="text-center text-gray-500 py-10 border rounded-lg"
+            >
+                Carregando...
+            </div>
+
+            <div
+                v-else-if="checklists.length === 0"
                 class="text-center text-gray-500 py-10 border rounded-lg"
             >
                 Nenhum checklist cadastrado.
